@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  license-service:
+    image: qw-userapi:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=default"
+    networks:
+      backend:
+        aliases:
+          - "qw-userapi"
+networks:
+  backend:
+    driver: bridge
