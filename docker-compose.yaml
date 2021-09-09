@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   license-service:
-    image: qw-userapi:0.0.1-SNAPSHOT
+    image: qw-userapi:0.1
     ports:
       - "8080:8080"
     environment:
