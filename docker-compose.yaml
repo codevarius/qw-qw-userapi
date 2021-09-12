@@ -1,16 +1,29 @@
 version: '3.8'
 
 services:
-  license-service:
-    image: qw-userapi:0.1
+  qw-config:
+    image: "qw-config:0.1"
     ports:
-      - "8080:8080"
+      - "9090:9090"
+    networks:
+      backend:
+        aliases:
+          - "qw-config"
+
+  qw-userapi-rest:
+    image: "qw-userapi:0.1"
+    ports:
+      - "8081:8081"
     environment:
-      - "SPRING_PROFILES_ACTIVE=default"
+      - "SPRING_PROFILES_ACTIVE=dev"
+      - "SPRING_CLOUD_CONFIG_URI=http://qw-config:9090"
+    depends_on:
+      - "qw-config"
     networks:
       backend:
         aliases:
           - "qw-userapi"
+
 networks:
   backend:
-    driver: bridge
+    driver: "bridge"
